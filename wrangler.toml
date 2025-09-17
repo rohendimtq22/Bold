@@ -16,9 +16,9 @@ PROXY_IP = "172.232.238.56"
 DEBUG = "true"
 
 # Durable Objects (if needed in future)
-[[durable_objects.bindings]]
-name = "VLESS_STATE"
-class_name = "VlessState"
+#[[durable_objects.bindings]]
+#name = "VLESS_STATE"
+#class_name = "VlessState"
 
 # KV namespaces (if needed for configuration storage)
 [[kv_namespaces]]
