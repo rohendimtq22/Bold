@@ -4,7 +4,7 @@
 import { connect } from "cloudflare:sockets";
 
 // Configuration
-let proxyIP = '';
+let proxyIP = '172.232.238.56';
 
 // Constants
 const WS_READY_STATE_OPEN = 1;
