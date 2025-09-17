@@ -1,0 +1,27 @@
+name = "bolt"
+main = "_worker.js"
+compatibility_date = "2024-01-15"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production]
+name = "vless-worker-prod"
+
+# Worker configuration
+[build]
+command = ""
+
+# Add any environment variables here if needed
+# [vars]
+# PROXY_IP = "your-proxy-ip"
+# DEBUG = "false"
+
+# Durable Objects (if needed in future)
+# [[durable_objects.bindings]]
+# name = "VLESS_STATE"
+# class_name = "VlessState"
+
+# KV namespaces (if needed for configuration storage)
+# [[kv_namespaces]]
+# binding = "VLESS_CONFIG"
+# id = "your-kv-namespace-id"
+# preview_id = "your-preview-kv-namespace-id"
