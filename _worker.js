@@ -532,3 +532,160 @@ function safeCloseWebSocket(socket) {
 }
 
 function parseProxyAddress(proxyIP, defaultAddress, defaultPort) {
+  if (!proxyIP) {
+    return [defaultAddress, defaultPort];
+  }
+  
+  const parts = proxyIP.split(/[:=]/);
+  const address = parts[0] || defaultAddress;
+  const port = parts[1] ? parseInt(parts[1], 10) : defaultPort;
+  
+  return [address, port];
+}
+
+function getStatusPage() {
+  return `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VLESS Worker Status</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        .status-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #28a745;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .info-item {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #495057;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .info-value {
+            font-size: 1.2em;
+            color: #007bff;
+            margin-top: 5px;
+        }
+        .endpoint {
+            background: #d1ecf1;
+            border-left-color: #17a2b8;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .feature-list li:before {
+            content: "✓";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 VLESS Worker</h1>
+        
+        <div class="status-card">
+            <h3>✅ Worker Status: Active</h3>
+            <p>Your VLESS proxy worker is running and ready to handle connections.</p>
+        </div>
+        
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-label">Protocol</div>
+                <div class="info-value">VLESS</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Transport</div>
+                <div class="info-value">WebSocket</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Proxy IP</div>
+                <div class="info-value">${proxyIP || 'Auto'}</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">DNS Support</div>
+                <div class="info-value">UDP Port 53</div>
+            </div>
+        </div>
+        
+        <div class="status-card">
+            <h3>🔧 Features</h3>
+            <ul class="feature-list">
+                <li>TCP and UDP (DNS) proxy support</li>
+                <li>WebSocket transport with early data</li>
+                <li>Automatic connection retry</li>
+                <li>IPv4, IPv6, and domain name resolution</li>
+                <li>DNS over HTTPS integration</li>
+                <li>Comprehensive error handling and logging</li>
+            </ul>
+        </div>
+        
+        <div class="status-card endpoint">
+            <h3>📡 Endpoints</h3>
+            <p><strong>WebSocket:</strong> wss://your-worker-domain.workers.dev/</p>
+            <p><strong>Health Check:</strong> https://your-worker-domain.workers.dev/health</p>
+            <p><strong>With Proxy IP:</strong> wss://your-worker-domain.workers.dev/proxy-ip:port</p>
+        </div>
+        
+        <div class="status-card">
+            <h3>⚡ Performance</h3>
+            <p>This worker is optimized for:</p>
+            <ul class="feature-list">
+                <li>Low latency connections</li>
+                <li>Efficient memory usage</li>
+                <li>Automatic error recovery</li>
+                <li>Scalable concurrent connections</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+  `;
+}
