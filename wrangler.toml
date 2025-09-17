@@ -8,7 +8,7 @@ name = "vless-worker-prod"
 
 # Worker configuration
 [build]
-command = "npm run build"  # or the command you need to build your worker
+command = ""  # or the command you need to build your worker
 
 # Add any environment variables here if needed
 [vars]
