@@ -8,20 +8,20 @@ name = "vless-worker-prod"
 
 # Worker configuration
 [build]
-command = ""
+command = "npm run build"  # or the command you need to build your worker
 
 # Add any environment variables here if needed
-# [vars]
-# PROXY_IP = "your-proxy-ip"
-# DEBUG = "false"
+[vars]
+PROXY_IP = "172.232.238.56"
+DEBUG = "true"
 
 # Durable Objects (if needed in future)
-# [[durable_objects.bindings]]
-# name = "VLESS_STATE"
-# class_name = "VlessState"
+[[durable_objects.bindings]]
+name = "VLESS_STATE"
+class_name = "VlessState"
 
 # KV namespaces (if needed for configuration storage)
-# [[kv_namespaces]]
-# binding = "VLESS_CONFIG"
-# id = "your-kv-namespace-id"
-# preview_id = "your-preview-kv-namespace-id"
+[[kv_namespaces]]
+binding = "VLESS_CONFIG"
+id = "243d995a3bba45e5bad6f08a5484c2d8"
+preview_id = "vless-preview-config-id"
