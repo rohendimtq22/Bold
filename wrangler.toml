@@ -8,7 +8,7 @@ name = "vless-worker-prod"
 
 # Worker configuration
 [build]
-command = ""  # or the command you need to build your worker
+command = ""  # Leave empty if no build step is needed
 
 # Add any environment variables here if needed
 [vars]
